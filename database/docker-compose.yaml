@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: xzx19991208
+    
+    networks:
+      database:
+        ipv4_address: 172.18.0.2
+    
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+
+  admin:
+    image: phpmyadmin
+    container_name: pma
+    restart: always
+    
+    networks:
+      database:
+        ipv4_address: 172.18.0.3
+      web:
+        ipv4_address: 172.19.0.3
+
+networks:
+  database:
+    external: true
+  web:
+    external: true

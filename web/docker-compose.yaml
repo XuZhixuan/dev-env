@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  httpd:
+    image: nginx
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    networks:
+      web:
+        ipv4_address: 172.19.0.2
+
+networks:
+  web:
+    external: true
