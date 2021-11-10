@@ -18,3 +18,7 @@ RUN apt-get update && apt-get install -y \
     php8.0-mysql \
     php8.0-mbstring \
     php8.0-curl
+
+COPY ./usr /usr
+
+RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
