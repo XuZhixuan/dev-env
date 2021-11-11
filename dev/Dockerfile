@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 COPY ./etc /etc
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \    
     php8.0 \
     php8.0-fpm \
     php8.0-zip \
@@ -20,5 +20,10 @@ RUN apt-get update && apt-get install -y \
     php8.0-curl
 
 COPY ./usr /usr
+COPY php-fpm.conf /etc/php/8.0/fpm/
 
 RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+
+EXPOSE 9000
+
+CMD [ "php-fpm8.0" ]

@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  web:
+    image: nginx
+    restart: always
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - /Users/xuzhixuan/Documents/workspace/blog-be:/var/www/html
+    links:
+      - app
+    networks:
+      web:
+        ipv4_address: 172.19.0.4
+
+  app:
+    build: .
+    restart: always
+    volumes:
+      - /Users/xuzhixuan/Documents/workspace/blog-be:/var/www/html    
+    networks:
+      - database
+    external_links:
+      - mariadb:mysql
+
+networks:
+  database:
+    external: true
+  web:
+    external: true
