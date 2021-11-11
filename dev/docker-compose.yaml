@@ -5,13 +5,12 @@ services:
     image: nginx
     restart: always
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
+      - ./etc/nginx/conf.d:/etc/nginx/conf.d
       - /Users/xuzhixuan/Documents/workspace/blog-be:/var/www/html
-    links:
-      - app
     networks:
       web:
         ipv4_address: 172.19.0.4
+      fpm:
 
   app:
     build: .
@@ -20,11 +19,12 @@ services:
       - /Users/xuzhixuan/Documents/workspace/blog-be:/var/www/html    
     networks:
       - database
-    external_links:
-      - mariadb:mysql
+      - fpm
 
 networks:
   database:
     external: true
   web:
     external: true
+  fpm:
+    driver: bridge
