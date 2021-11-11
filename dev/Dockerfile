@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
     php8.0-curl
 
 COPY ./usr /usr
-COPY php-fpm.conf /etc/php/8.0/fpm/
+COPY ./etc1 /etc
 
 RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
